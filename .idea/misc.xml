@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.12 (airport_tracker_complete)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (airport_tracker_complete)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (pytest1)" project-jdk-type="Python SDK" />
 </project>
