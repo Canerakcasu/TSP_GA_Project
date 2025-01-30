@@ -6,6 +6,28 @@ import random
 import os
 
 
+def greedy_solution(df):
+    """
+    Implements a greedy algorithm to find an initial TSP solution.
+    """
+    cities = df["id"].tolist()
+    current_city = cities[0]  # Start from the first city
+    route = [current_city]
+    unvisited_cities = set(cities[1:])
+
+    while unvisited_cities:
+        nearest_city = min(unvisited_cities, key=lambda city: distance(df.iloc[current_city - 1], df.iloc[city - 1]))
+        route.append(nearest_city)
+        unvisited_cities.remove(nearest_city)
+        current_city = nearest_city
+
+    return route
+
+
+
+
+
+
 def parse_tsp(filename):
     lines = open(filename).read().strip().splitlines()
     data = []
@@ -71,13 +93,16 @@ def crossover_ox(parent1, parent2):
 def mutate_inversion(sol, prob):
     if random.random() < prob:
         i, j = sorted(random.sample(range(len(sol)), 2))
-        sol[i:j + 1] = reversed(sol[i:j + 1])
+        sol[i:j + 1] = sol[i:j + 1][::-1]  # Gerçek ters çevirme işlemi
     return sol
 
 
 def new_generation(df, pop, pop_size, pmut, pxover, k):
+    elite_count = 5  # İlk 5 en iyi bireyi koru
+    elite_solutions = sorted(pop, key=lambda x: total_distance(df, x))[:elite_count]
+
     newpop = []
-    while len(newpop) < pop_size:
+    while len(newpop) < (pop_size - elite_count):
         p1 = selection_tournament(df, pop, k)
         p2 = selection_tournament(df, pop, k)
         if random.random() < pxover:
@@ -86,10 +111,12 @@ def new_generation(df, pop, pop_size, pmut, pxover, k):
             child = p1.copy()
         child = mutate_inversion(child, pmut)
         newpop.append(child)
+
+    newpop.extend(elite_solutions)
     return newpop
 
 
-def run_ga(df, pop_size, epochs, pmut, pxover, k, patience=100):
+def run_ga(df, pop_size, epochs, pmut, pxover, k, patience=50):
     pop = create_population(df, pop_size)
     best_sol = None
     best_fit = float("inf")
@@ -118,40 +145,29 @@ def run_ga(df, pop_size, epochs, pmut, pxover, k, patience=100):
 
         pop = new_generation(df, pop, pop_size, pmut, pxover, k)
 
-        if gen % 20 == 0:
-            pop = pop[:-5] + [random_solution(df) for _ in range(5)]
+        if gen % 10 == 0:
+            pop.extend([random_solution(df) for _ in range(10)])
 
     return best_sol, best_fit, x_vals, y_vals
 
 
-def greedy_solution(df):
-    cities = df["id"].tolist()
-    current_city = cities[0]
-    route = [current_city]
-    unvisited_cities = set(cities[1:])
-
-    while unvisited_cities:
-        nearest_city = min(unvisited_cities, key=lambda city: distance(df.iloc[current_city - 1], df.iloc[city - 1]))
-        route.append(nearest_city)
-        unvisited_cities.remove(nearest_city)
-        current_city = nearest_city
-
-    return route
-
-
-def plot_results(x_vals, y_vals, gdist, pop_size, epochs, pmut, pxover, k):
+def plot_results(x_vals, y_vals, gdist, pop_size, epochs, pmut, pxover, k, best_fit):
     plt.figure(figsize=(10, 6))
-
-    # İlk grafik: GA ilerleyişi
     plt.plot(x_vals, y_vals, label="GA Best Distance", color="blue", linewidth=2)
     plt.axhline(y=gdist, color="green", linestyle="--", label="Greedy Distance")
-    plt.title("Genetic Algorithm Progress", fontsize=14, fontweight="bold")
+
+    # Grafik başlığına test edilen parametreleri ekle
+    plt.title(f"Genetic Algorithm Progress\nPop: {pop_size}, Epochs: {epochs}, pmut: {pmut}, pxover: {pxover}, k: {k}",
+              fontsize=12, fontweight="bold")
+
+    # En iyi bulunan sonucu grafikte göster
+    plt.text(len(x_vals) * 0.8, min(y_vals) + 50, f"Final Best: {best_fit:.2f}", fontsize=10,
+             bbox=dict(facecolor='white', alpha=0.7))
+
     plt.xlabel("Generation", fontsize=12)
     plt.ylabel("Distance", fontsize=12)
     plt.legend(fontsize=10)
     plt.grid(True, linestyle="--", alpha=0.6)
-
-    plt.tight_layout()
 
     # Kaydetme
     output_filename = f"results_pop{pop_size}_epochs{epochs}_pmut{pmut}_pxover{pxover}_k{k}_gdist{gdist:.2f}.png"
@@ -170,9 +186,9 @@ def main():
     df = parse_tsp(filename)
 
     # Parametreler
-    pop_size = 150
-    epochs = 10
-    pmut = 0.3
+    pop_size = 300
+    epochs = 150
+    pmut = 0.5  # Mutation probability
     pxover = 0.7
     k = 5
 
@@ -184,10 +200,10 @@ def main():
     best_sol, best_fit, x_vals, y_vals = run_ga(df, pop_size, epochs, pmut, pxover, k)
 
     # Sonuçları görselleştir
-    plot_results(x_vals, y_vals, gdist, pop_size, epochs, pmut, pxover, k)
+    plot_results(x_vals, y_vals, gdist, pop_size, epochs, pmut, pxover, k, best_fit)
 
     print(f"\nFinal Results:")
-    print(f"Greedy Distance: {gdist:.2f}")
+    print(f"Greed   y Distance: {gdist:.2f}")
     print(f"GA Best Distance: {best_fit:.2f}")
 
 

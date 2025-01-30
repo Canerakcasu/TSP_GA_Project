@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fdcdbf9d-bc98-44eb-8be2-f59988e03599" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/TSP_GA_Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TSP_GA_Project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TSP_GA_Final_Report.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/berlin52.tsp_kroA100.tsp_results_pop50_epochs100_pmut0.3_pxover0.7_k5_gdist8980.92.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/berlin52.tsp_results_pop125_epochs125_pmut0.5_pxover0.7_k5_gdist8980.92.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/berlin52.tsp_results_pop50_epochs100_pmut0.3_pxover0.7_k5_gdist8980.92.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/kroA150.tsp_results_pop100_epochs100_pmut0.3_pxover0.7_k5_gdist33609.87.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result.png" beforeDir="false" afterPath="$PROJECT_DIR$/result.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/results_pop150_epochs10_pmut0.3_pxover0.7_k5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/results_pop150_epochs10_pmut0.3_pxover0.7_k5_gdist8980.92.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/tsp_results_pop150_epochs20_pmut0.3_pxover0.7_k5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/tsp_results_pop150_epochs500_pmut0.3_pxover0.7_k5.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,17 +33,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Python.main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/can/TSP_GA_Project",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/can/TSP_GA_Project&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
